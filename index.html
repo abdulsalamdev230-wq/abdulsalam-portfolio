@@ -1,0 +1,712 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Abdul Salam - Award-winning 3D Personal Portfolio of a Flutter Developer & Frontend Web Developer. Showcase of mobile apps and modern web projects.">
+  <title>Abdul Salam | Flutter & Frontend Developer | 3D Portfolio</title>
+  
+  <!-- Favicon (inline SVG - no extra file needed) -->
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0' y1='0' x2='1' y2='1'%3E%3Cstop offset='0' stop-color='%23a855f7'/%3E%3Cstop offset='1' stop-color='%2306b6d4'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='64' height='64' rx='14' fill='%23070614'/%3E%3Ctext x='32' y='43' font-family='Arial,sans-serif' font-size='28' font-weight='bold' fill='url(%23g)' text-anchor='middle'%3EA.S%3C/text%3E%3C/svg%3E">
+  
+  <!-- FontAwesome for icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  
+  <!-- Custom stylesheet -->
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- Loading Screen -->
+  <div class="loader-container" id="loader">
+    <div class="loader-logo">A.S</div>
+    <div class="loader-bar-bg">
+      <div class="loader-bar" id="loader-bar"></div>
+    </div>
+    <div class="loader-percent" id="loader-percent">0%</div>
+  </div>
+
+  <!-- Custom Cursor Follower -->
+  <div class="custom-cursor" id="cursor"></div>
+  <div class="custom-cursor-dot" id="cursor-dot"></div>
+
+  <!-- ThreeJS Background Canvas -->
+  <canvas id="three-canvas"></canvas>
+
+  <!-- Responsive Navigation Bar -->
+  <nav class="navbar glass-panel">
+    <a href="#hero" class="nav-logo" id="nav-logo">Abdul Salam</a>
+    
+    <ul class="nav-links" id="nav-links">
+      <li><a href="#hero" class="nav-link">Home</a></li>
+      <li><a href="#about" class="nav-link">About</a></li>
+      <li><a href="#skills" class="nav-link">Skills</a></li>
+      <li><a href="#services" class="nav-link">Services</a></li>
+      <li><a href="#projects" class="nav-link">Projects</a></li>
+      <li><a href="#experience" class="nav-link">Experience</a></li>
+      <li><a href="#contact" class="nav-link">Contact</a></li>
+    </ul>
+
+    <div class="nav-actions">
+      <!-- Dark/Light Theme Toggle -->
+      <button id="theme-toggle" class="social-icon" aria-label="Toggle Theme" style="width: 40px; height: 40px; border-radius: 50%; font-size: 1rem; cursor: pointer;">
+        <i class="fa-solid fa-moon"></i>
+      </button>
+      <a href="#contact" class="btn-premium btn-outline-glass" style="padding: 8px 18px; font-size: 0.85rem; border-radius: 30px;">Let's Chat</a>
+    </div>
+
+    <button class="menu-btn" id="menu-btn" aria-label="Toggle Menu">
+      <span></span>
+      <span></span>
+      <span></span>
+    </button>
+  </nav>
+
+  <!-- Glowing background blobs -->
+  <div class="glowing-blob blob-1"></div>
+  <div class="glowing-blob blob-2"></div>
+
+  <!-- HERO SECTION -->
+  <section class="hero" id="hero">
+    <div class="container">
+      <div class="hero-grid">
+        <div class="hero-content">
+          <div class="hero-hello">HI, I'M ABDUL SALAM</div>
+          <h1 class="hero-title">
+            <span class="text-reveal text-gradient-purple">Flutter Developer</span>
+            <span class="text-reveal text-gradient-cyan">& Frontend Web</span>
+            <span class="text-reveal">Developer</span>
+          </h1>
+          <p class="hero-subtitle">Crafting High-Performance Mobile & Immersive Web Experiences</p>
+          <p class="hero-desc">I build robust cross-platform applications and user-centric web applications with smooth animations, elegant glassmorphic layouts, and pixel-perfect responsiveness.</p>
+          <div class="hero-buttons">
+            <a href="#projects" class="btn-premium btn-primary-gradient">
+              <span>View Portfolio <i class="fa-solid fa-arrow-right" style="margin-left: 8px;"></i></span>
+            </a>
+            <a href="#contact" class="btn-premium btn-outline-glass">
+              <span>Contact Me</span>
+            </a>
+          </div>
+        </div>
+        
+        <div class="hero-visual">
+          <!-- Floating code snippet cards -->
+         
+          <div class="code-floating-card glass-panel code-card-2">
+            <span style="color: #ff5e62;">HI I AM AbdulSalam &amp; Frontend Developer, Flutter Developer</span>
+          </div>
+          
+          <!-- Avatar Container -->
+          <div class="avatar-container" id="hero-avatar">
+            <img src="photo.jpg.jpeg" class="avatar-image">
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ABOUT ME SECTION -->
+  <section class="about" id="about">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-tag">Who I Am</span>
+        <h2 class="section-title">About Me</h2>
+      </div>
+      
+      <div class="about-grid">
+        <div class="about-visual">
+          <div class="about-stats">
+            <div class="stat-card glass-panel">
+              <div class="stat-number" id="stat-experience">3+</div>
+              <div class="stat-label">Years Experience</div>
+            </div>
+            <div class="stat-card glass-panel">
+              <div class="stat-number" id="stat-projects">30+</div>
+              <div class="stat-label">Projects Completed</div>
+            </div>
+            <div class="stat-card glass-panel">
+              <div class="stat-number" id="stat-clients">15+</div>
+              <div class="stat-label">Happy Clients</div>
+            </div>
+            <div class="stat-card glass-panel">
+              <div class="stat-number" id="stat-satisfaction">100%</div>
+              <div class="stat-label">Client Satisfaction</div>
+            </div>
+          </div>
+        </div>
+        
+        <div class="about-text">
+          <h3>Fusing Creative Design with Robust Engineering</h3>
+          <p>I am a passionate software engineer specializing in cross-platform mobile app development with Flutter & Dart, alongside modern frontend web engineering. My focus lies in writing clean, modular, and maintainable code that delivers outstanding performance.</p>
+          <p>Whether it is building custom UI elements for mobile apps, implementing state-management systems, or crafting gorgeous interactive web products using Three.js and CSS 3D transforms, I bridge the gap between design concepts and production-ready applications.</p>
+          
+          <div class="about-meta">
+            <div class="meta-item"><i class="fa-solid fa-envelope"></i> abdulshooter4303m@email.com</div>
+            <div class="meta-item"><i class="fa-solid fa-location-dot"></i> karachi, Pakistan</div>
+            <div class="meta-item"><i class="fa-solid fa-graduation-cap"></i> BS in Computer Science</div>
+            <div class="meta-item"><i class="fa-solid fa-briefcase"></i> Available for Freelance</div>
+          </div>
+          
+          <div class="hero-buttons" style="margin-top: 35px;">
+            <a href="assets/cv.pdf" download class="btn-premium btn-primary-gradient">
+              <span>Download CV <i class="fa-solid fa-download" style="margin-left: 8px;"></i></span>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SKILLS SECTION -->
+  <section class="skills" id="skills">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-tag">My Expertise</span>
+        <h2 class="section-title">Technical Skills</h2>
+      </div>
+      
+      <div class="skills-grid">
+        <!-- Skill 1 -->
+        <div class="skill-card glass-panel" data-tilt>
+          <div class="skill-icon-wrapper">
+            <i class="fa-solid fa-mobile-screen-button"></i>
+          </div>
+          <h3 class="skill-name">Flutter</h3>
+          <div class="skill-progress-container">
+            <div class="skill-progress-info">
+              <span>Expertise</span>
+              <span>95%</span>
+            </div>
+            <div class="skill-progress-bar">
+              <div class="skill-progress-fill" data-progress="95%"></div>
+            </div>
+          </div>
+        </div>
+        
+        <!-- Skill 2 -->
+        <div class="skill-card glass-panel" data-tilt>
+          <div class="skill-icon-wrapper">
+            <i class="fa-solid fa-code"></i>
+          </div>
+          <h3 class="skill-name">Dart</h3>
+          <div class="skill-progress-container">
+            <div class="skill-progress-info">
+              <span>Expertise</span>
+              <span>90%</span>
+            </div>
+            <div class="skill-progress-bar">
+              <div class="skill-progress-fill" data-progress="90%"></div>
+            </div>
+          </div>
+        </div>
+        
+        <!-- Skill 3 -->
+        <div class="skill-card glass-panel" data-tilt>
+          <div class="skill-icon-wrapper">
+            <i class="fa-brands fa-html5"></i>
+          </div>
+          <h3 class="skill-name">HTML5</h3>
+          <div class="skill-progress-container">
+            <div class="skill-progress-info">
+              <span>Expertise</span>
+              <span>95%</span>
+            </div>
+            <div class="skill-progress-bar">
+              <div class="skill-progress-fill" data-progress="95%"></div>
+            </div>
+          </div>
+        </div>
+        
+        <!-- Skill 4 -->
+        <div class="skill-card glass-panel" data-tilt>
+          <div class="skill-icon-wrapper">
+            <i class="fa-brands fa-css3-alt"></i>
+          </div>
+          <h3 class="skill-name">CSS3 / Modern styling</h3>
+          <div class="skill-progress-container">
+            <div class="skill-progress-info">
+              <span>Expertise</span>
+              <span>90%</span>
+            </div>
+            <div class="skill-progress-bar">
+              <div class="skill-progress-fill" data-progress="90%"></div>
+            </div>
+          </div>
+        </div>
+        
+        <!-- Skill 5 -->
+        <div class="skill-card glass-panel" data-tilt>
+          <div class="skill-icon-wrapper">
+            <i class="fa-brands fa-js"></i>
+          </div>
+          <h3 class="skill-name">JavaScript</h3>
+          <div class="skill-progress-container">
+            <div class="skill-progress-info">
+              <span>Expertise</span>
+              <span>85%</span>
+            </div>
+            <div class="skill-progress-bar">
+              <div class="skill-progress-fill" data-progress="85%"></div>
+            </div>
+          </div>
+        </div>
+        
+        <!-- Skill 6 -->
+        <div class="skill-card glass-panel" data-tilt>
+          <div class="skill-icon-wrapper">
+            <i class="fa-brands fa-react"></i>
+          </div>
+          <h3 class="skill-name">React</h3>
+          <div class="skill-progress-container">
+            <div class="skill-progress-info">
+              <span>Expertise</span>
+              <span>80%</span>
+            </div>
+            <div class="skill-progress-bar">
+              <div class="skill-progress-fill" data-progress="80%"></div>
+            </div>
+          </div>
+        </div>
+        
+        <!-- Skill 7 -->
+        <div class="skill-card glass-panel" data-tilt>
+          <div class="skill-icon-wrapper">
+            <i class="fa-solid fa-database"></i>
+          </div>
+          <h3 class="skill-name">Firebase</h3>
+          <div class="skill-progress-container">
+            <div class="skill-progress-info">
+              <span>Expertise</span>
+              <span>85%</span>
+            </div>
+            <div class="skill-progress-bar">
+              <div class="skill-progress-fill" data-progress="85%"></div>
+            </div>
+          </div>
+        </div>
+        
+        <!-- Skill 8 -->
+        <div class="skill-card glass-panel" data-tilt>
+          <div class="skill-icon-wrapper">
+            <i class="fa-brands fa-git-alt"></i>
+          </div>
+          <h3 class="skill-name">Git & Version Control</h3>
+          <div class="skill-progress-container">
+            <div class="skill-progress-info">
+              <span>Expertise</span>
+              <span>90%</span>
+            </div>
+            <div class="skill-progress-bar">
+              <div class="skill-progress-fill" data-progress="90%"></div>
+            </div>
+          </div>
+        </div>
+        
+        <!-- Skill 9 -->
+        <div class="skill-card glass-panel" data-tilt>
+          <div class="skill-icon-wrapper">
+            <i class="fa-brands fa-github"></i>
+          </div>
+          <h3 class="skill-name">GitHub</h3>
+          <div class="skill-progress-container">
+            <div class="skill-progress-info">
+              <span>Expertise</span>
+              <span>90%</span>
+            </div>
+            <div class="skill-progress-bar">
+              <div class="skill-progress-fill" data-progress="90%"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SERVICES SECTION -->
+  <section class="services" id="services">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-tag">What I Offer</span>
+        <h2 class="section-title">My Services</h2>
+      </div>
+      
+      <div class="services-grid">
+        <!-- Service 1 -->
+        <div class="service-card glass-panel">
+          <div class="service-icon"><i class="fa-solid fa-mobile-screen"></i></div>
+          <h3 class="service-title">Cross-Platform App Development</h3>
+          <p class="service-desc">Creating gorgeous, fluid mobile applications for iOS & Android utilizing Flutter. Using Clean Architecture, Bloc/Provider state management, and optimized native platform bridges.</p>
+        </div>
+        
+        <!-- Service 2 -->
+        <div class="service-card glass-panel">
+          <div class="service-icon"><i class="fa-solid fa-laptop-code"></i></div>
+          <h3 class="service-title">Creative Frontend Engineering</h3>
+          <p class="service-desc">Building premium, fast, and SEO-friendly web interfaces using HTML, CSS, JavaScript, and React. Crafting custom micro-animations and smooth scroll storytelling for immersive experiences.</p>
+        </div>
+        
+        <!-- Service 3 -->
+        <div class="service-card glass-panel">
+          <div class="service-icon"><i class="fa-solid fa-cubes"></i></div>
+          <h3 class="service-title">3D Web Integrations</h3>
+          <p class="service-desc">Enhancing web standard layers with interactive 3D particle animations, lighting, canvas rendering using Three.js, and complex timeline scrolls powered by GSAP & ScrollTrigger.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PROJECTS SECTION -->
+  <section class="projects" id="projects">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-tag">Selected Works</span>
+        <h2 class="section-title">Featured Projects</h2>
+      </div>
+      
+      <div class="projects-grid">
+        <!-- Project 1 -->
+        <div class="project-card glass-panel" data-tilt>
+          <div class="project-img-wrapper">
+            <img src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&w=600&h=400&q=80" alt="Flutter E-Commerce App" class="project-img">
+            <div class="project-overlay"></div>
+            <div class="project-tags">
+              <span class="project-tag">Flutter</span>
+              <span class="project-tag">Dart</span>
+              <span class="project-tag">Stripe</span>
+            </div>
+          </div>
+          <div class="project-info">
+            <h3 class="project-title">Flutter E-Commerce Shopping App</h3>
+            <p class="project-desc">A premium mobile retail experience. Includes interactive product grids, category filtering, a shopping cart state system, and simulated secure credit card processing.</p>
+            <div class="project-links">
+              <a href="#" class="project-btn project-btn-live">Live Demo <i class="fa-solid fa-arrow-up-right-from-square"></i></a>
+              <a href="#" class="project-btn project-btn-git"><i class="fa-brands fa-github"></i> GitHub</a>
+            </div>
+          </div>
+        </div>
+        
+        <!-- Project 2 -->
+        <div class="project-card glass-panel" data-tilt>
+          <div class="project-img-wrapper">
+            <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=600&h=400&q=80" alt="React SaaS Analytics Dashboard" class="project-img">
+            <div class="project-overlay"></div>
+            <div class="project-tags">
+              <span class="project-tag">React</span>
+              <span class="project-tag">Chart.js</span>
+              <span class="project-tag">Tailwind</span>
+            </div>
+          </div>
+          <div class="project-info">
+            <h3 class="project-title">SaaS Financial Analytics Dashboard</h3>
+            <p class="project-desc">A futuristic financial tracker on web. Rich vector charts tracking sales, margins, and user retention. Integrated light/dark mode and glassmorphism styling.</p>
+            <div class="project-links">
+              <a href="#" class="project-btn project-btn-live">Live Demo <i class="fa-solid fa-arrow-up-right-from-square"></i></a>
+              <a href="#" class="project-btn project-btn-git"><i class="fa-brands fa-github"></i> GitHub</a>
+            </div>
+          </div>
+        </div>
+        
+        <!-- Project 3 -->
+        <div class="project-card glass-panel" data-tilt>
+          <div class="project-img-wrapper">
+            <img src="https://images.unsplash.com/photo-1611162617213-7d7a39e9b1d7?auto=format&fit=crop&w=600&h=400&q=80" alt="Flutter Real-time Chat App" class="project-img">
+            <div class="project-overlay"></div>
+            <div class="project-tags">
+              <span class="project-tag">Flutter</span>
+              <span class="project-tag">Firebase</span>
+              <span class="project-tag">WebSockets</span>
+            </div>
+          </div>
+          <div class="project-info">
+            <h3 class="project-title">Flutter Real-Time Messaging App</h3>
+            <p class="project-desc">A fully functional secure chat mobile app with instant sync, profile setup, offline caching, push notifications, and support for multimedia uploads.</p>
+            <div class="project-links">
+              <a href="#" class="project-btn project-btn-live">Live Demo <i class="fa-solid fa-arrow-up-right-from-square"></i></a>
+              <a href="#" class="project-btn project-btn-git"><i class="fa-brands fa-github"></i> GitHub</a>
+            </div>
+          </div>
+        </div>
+        
+        <!-- Project 4 -->
+        <div class="project-card glass-panel" data-tilt>
+          <div class="project-img-wrapper">
+            <img src="https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?auto=format&fit=crop&w=600&h=400&q=80" alt="AI SaaS Startup Landing Page" class="project-img">
+            <div class="project-overlay"></div>
+            <div class="project-tags">
+              <span class="project-tag">React</span>
+              <span class="project-tag">GSAP</span>
+              <span class="project-tag">Three.js</span>
+            </div>
+          </div>
+          <div class="project-info">
+            <h3 class="project-title">AI SaaS Startup Landing Page</h3>
+            <p class="project-desc">An Awwwards-style creative promotional website showing dynamic pricing cards, magnetic cursor animations, scroll reveals, and elegant particle waves.</p>
+            <div class="project-links">
+              <a href="#" class="project-btn project-btn-live">Live Demo <i class="fa-solid fa-arrow-up-right-from-square"></i></a>
+              <a href="#" class="project-btn project-btn-git"><i class="fa-brands fa-github"></i> GitHub</a>
+            </div>
+          </div>
+        </div>
+        
+        <!-- Project 5 -->
+        <div class="project-card glass-panel" data-tilt>
+          <div class="project-img-wrapper">
+            <img src="https://images.unsplash.com/photo-1592210454359-9043f067919b?auto=format&fit=crop&w=600&h=400&q=80" alt="Flutter Weather App" class="project-img">
+            <div class="project-overlay"></div>
+            <div class="project-tags">
+              <span class="project-tag">Flutter</span>
+              <span class="project-tag">REST API</span>
+              <span class="project-tag">Neomorphism</span>
+            </div>
+          </div>
+          <div class="project-info">
+            <h3 class="project-title">Flutter Weather Neomorphic App</h3>
+            <p class="project-desc">Mobile application utilizing complex API pulls, neomorphic custom card vectors, location tracking, and visual climate weather states (rain/sun/clouds).</p>
+            <div class="project-links">
+              <a href="#" class="project-btn project-btn-live">Live Demo <i class="fa-solid fa-arrow-up-right-from-square"></i></a>
+              <a href="#" class="project-btn project-btn-git"><i class="fa-brands fa-github"></i> GitHub</a>
+            </div>
+          </div>
+        </div>
+        
+        <!-- Project 6 -->
+        <div class="project-card glass-panel" data-tilt>
+          <div class="project-img-wrapper">
+            <img src="https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?auto=format&fit=crop&w=600&h=400&q=80" alt="Kanban Board Web App" class="project-img">
+            <div class="project-overlay"></div>
+            <div class="project-tags">
+              <span class="project-tag">React</span>
+              <span class="project-tag">Node.js</span>
+              <span class="project-tag">MongoDB</span>
+            </div>
+          </div>
+          <div class="project-info">
+            <h3 class="project-title">Kanban Project Manager Web App</h3>
+            <p class="project-desc">A premium collaborative platform. Featuring smooth HTML5 drag-and-drop actions, board columns, detailed ticket comments, and task categories.</p>
+            <div class="project-links">
+              <a href="#" class="project-btn project-btn-live">Live Demo <i class="fa-solid fa-arrow-up-right-from-square"></i></a>
+              <a href="#" class="project-btn project-btn-git"><i class="fa-brands fa-github"></i> GitHub</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- EXPERIENCE & EDUCATION TIMELINE -->
+  <section class="experience" id="experience">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-tag">My Journey</span>
+        <h2 class="section-title">Experience & Education</h2>
+      </div>
+      
+      <div class="timeline">
+        <!-- Item 1 -->
+        <div class="timeline-item">
+          <div class="timeline-dot"></div>
+          <div class="timeline-card glass-panel">
+            <span class="timeline-date">2024 - Present</span>
+            <h3 class="timeline-title">Senior Flutter & Web Developer</h3>
+            <span class="timeline-company">Appic Solutions</span>
+            <p class="timeline-desc">Leading the mobile app engineering division. Built and shipped over 10 cross-platform Flutter applications on iOS App Store & Android Google Play Store. Established standard styling and UI modules.</p>
+          </div>
+        </div>
+        
+        <!-- Item 2 -->
+        <div class="timeline-item">
+          <div class="timeline-dot"></div>
+          <div class="timeline-card glass-panel">
+            <span class="timeline-date">2022 - 2024</span>
+            <h3 class="timeline-title">Mobile App Engineer</h3>
+            <span class="timeline-company">Devsync Technologies</span>
+            <p class="timeline-desc">Collaborated closely with designers to construct custom UI designs, REST API endpoints connection, animations, state caching, and responsive frontend screens using HTML, CSS, JavaScript, and React.</p>
+          </div>
+        </div>
+        
+        <!-- Item 3 -->
+        <div class="timeline-item">
+          <div class="timeline-dot"></div>
+          <div class="timeline-card glass-panel">
+            <span class="timeline-date">2019 - 2023</span>
+            <h3 class="timeline-title">BS Computer Science</h3>
+            <span class="timeline-company">University of Central Punjab</span>
+            <p class="timeline-desc">Focused on software architectures, database design, computer networks, human-computer interaction, and OOP structures. Graduated with honors.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- TESTIMONIALS SECTION -->
+  <section class="testimonials" id="testimonials">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-tag">Recommendations</span>
+        <h2 class="section-title">Client Testimonials</h2>
+      </div>
+      
+      <div class="testimonials-slider">
+        <div class="testimonial-track" id="testimonial-track">
+          <!-- Slide 1 -->
+          <div class="testimonial-card glass-panel">
+            <p class="testimonial-quote">"Abdul Salam was phenomenal. He rebuilt our entire retail app in Flutter in record time. The performance was flawless, and the fluid screens blew our customers away. Outstanding communication throughout the project."</p>
+            <div class="testimonial-author">
+              <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=100&h=100&q=80" alt="John Doe Avatar" class="testimonial-avatar">
+              <h4 class="testimonial-name">Johnathan Miller</h4>
+              <span class="testimonial-role">CTO, ShopVibe Global</span>
+            </div>
+          </div>
+          
+          <!-- Slide 2 -->
+          <div class="testimonial-card glass-panel">
+            <p class="testimonial-quote">"Excellent attention to detail. Abdul created a stunning creative SaaS dashboard page with GSAP animations. The glassmorphic layout was translated perfectly into clean responsive CSS. Highly recommended!"</p>
+            <div class="testimonial-author">
+              <img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&w=100&h=100&q=80" alt="Jane Smith Avatar" class="testimonial-avatar">
+              <h4 class="testimonial-name">Sarah Jenkins</h4>
+              <span class="testimonial-role">Founder, Nexus AI</span>
+            </div>
+          </div>
+          
+          <!-- Slide 3 -->
+          <div class="testimonial-card glass-panel">
+            <p class="testimonial-quote">"Working with Abdul was a pleasure. His mastery of Flutter state management and responsive web practices solved multiple bugs in our code. Delivery was prompt, organized, and clean."</p>
+            <div class="testimonial-author">
+              <img src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=100&h=100&q=80" alt="Alex Rivera Avatar" class="testimonial-avatar">
+              <h4 class="testimonial-name">Alex Rivera</h4>
+              <span class="testimonial-role">Product Lead, DevFlow Corp</span>
+            </div>
+          </div>
+        </div>
+        
+        <div class="testimonials-dots" id="testimonial-dots">
+          <span class="dot active" data-index="0"></span>
+          <span class="dot" data-index="1"></span>
+          <span class="dot" data-index="2"></span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTACT SECTION -->
+  <section class="contact" id="contact">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-tag">Get In Touch</span>
+        <h2 class="section-title">Let's Create Together</h2>
+      </div>
+      
+      <div class="contact-grid">
+        <div class="contact-info">
+          <div>
+            <h3 style="font-size: 1.8rem; margin-bottom: 20px;">Contact Information</h3>
+            <p style="margin-bottom: 30px;">Have a project idea, question, or want to say hello? Drop me a message and let's construct something awesome.</p>
+            
+            <div class="contact-details">
+              <div class="contact-item">
+                <div class="contact-icon"><i class="fa-solid fa-envelope"></i></div>
+                <div>
+                  <div class="contact-label">Email Me</div>
+                  <a href="mailto:abdulshooter4303m@email.com" class="contact-value">abdulshooter4303m@email.com</a>
+                </div>
+              </div>
+              
+              <div class="contact-item">
+                <div class="contact-icon"><i class="fa-solid fa-phone"></i></div>
+                <div>
+                  <div class="contact-label">Call Me</div>
+                  <a href="tel:+923293042100" class="contact-value">+92 3293042100</a>
+                </div>
+              </div>
+            </div>
+          </div>
+          
+          <!-- Social Profiles & Map -->
+          <div>
+            <h4 style="margin-bottom: 15px; font-size: 1.1rem;">Follow My Socials</h4>
+            <div class="social-links" style="margin-bottom: 30px;">
+              <a href="#" class="social-icon" aria-label="LinkedIn"><i class="fa-brands fa-linkedin-in"></i></a>
+              <a href="#" class="social-icon" aria-label="GitHub"><i class="fa-brands fa-github"></i></a>
+              <a href="#" class="social-icon" aria-label="Twitter"><i class="fa-brands fa-x-twitter"></i></a>
+              <a href="#" class="social-icon" aria-label="Dribbble"><i class="fa-brands fa-dribbble"></i></a>
+            </div>
+            
+            <!-- Styled dark google map iframe -->
+          </div>
+        </div>
+        
+        <!-- Contact Form -->
+        <div class="contact-form-panel glass-panel">
+          <form id="contact-form" novalidate>
+            <div class="form-group">
+              <input type="text" id="form-name" class="form-input" placeholder=" " required>
+              <label for="form-name" class="form-label">Full Name</label>
+            </div>
+            
+            <div class="form-group">
+              <input type="email" id="form-email" class="form-input" placeholder=" " required>
+              <label for="form-email" class="form-label">Email Address</label>
+            </div>
+            
+            <div class="form-group">
+              <input type="text" id="form-subject" class="form-input" placeholder=" " required>
+              <label for="form-subject" class="form-label">Subject</label>
+            </div>
+            
+            <div class="form-group">
+              <textarea id="form-message" class="form-input" placeholder=" " required></textarea>
+              <label for="form-message" class="form-label">Your Message</label>
+            </div>
+            
+            <button type="submit" class="btn-premium btn-primary-gradient" style="width: 100%; height: 55px; border-radius: 12px; margin-top: 10px;">
+              <span>Send Message <i class="fa-solid fa-paper-plane" style="margin-left: 8px;"></i></span>
+            </button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Interactive toast messages for form submission feedback -->
+  <div class="toast-msg" id="toast-message">
+    <i class="fa-solid fa-circle-check" id="toast-icon"></i>
+    <span id="toast-text">Message sent successfully!</span>
+  </div>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-grid">
+        <a href="#hero" class="footer-logo">A.S</a>
+        <ul class="footer-nav">
+          <li><a href="#hero" class="footer-link">Home</a></li>
+          <li><a href="#about" class="footer-link">About</a></li>
+          <li><a href="#skills" class="footer-link">Skills</a></li>
+          <li><a href="#services" class="footer-link">Services</a></li>
+          <li><a href="#projects" class="footer-link">Projects</a></li>
+          <li><a href="#experience" class="footer-link">Experience</a></li>
+        </ul>
+      </div>
+      
+      <div class="footer-bottom">
+        <div>&copy; 2026 Abdul Salam. All rights reserved. Designed for premium performance.</div>
+        <div>
+          <span style="margin-right: 15px;">Made with <i class="fa-solid fa-heart" style="color: var(--primary);"></i> & ThreeJS</span>
+          <a href="#" class="footer-link" style="margin-right: 15px;">Privacy Policy</a>
+          <a href="#" class="footer-link">Terms of Service</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- GSAP Core and ScrollTrigger CDN -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+  
+  <!-- ThreeJS Core CDN -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+  
+  <!-- Custom JS script -->
+  <script src="script.js"></script>
+</body>
+</html>

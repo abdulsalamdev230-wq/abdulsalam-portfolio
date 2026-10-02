@@ -1,0 +1,8 @@
+# Local tooling / logs
+.freebuff/
+server.log
+*.log
+
+# OS junk
+.DS_Store
+Thumbs.db
