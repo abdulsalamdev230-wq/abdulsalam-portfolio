@@ -3,6 +3,10 @@
 server.log
 *.log
 
+# Node
+node_modules/
+package-lock.json
+
 # OS junk
 .DS_Store
 Thumbs.db
