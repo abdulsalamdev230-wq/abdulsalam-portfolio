@@ -4,7 +4,40 @@
 ================================================================
 */
 
+/* ==========================================================
+  ⚙️ SITE CONFIG - YAHAN APNE REAL LINKS DALEIN
+  Sirf is block ko edit karein, baqi code ko mut muss kiye.
+========================================================== */
+const SITE_CONFIG = {
+  // Social profiles (ya jahan '#' hai wahan apna poora URL likhein)
+  socials: {
+    linkedin: '#',  // e.g. 'https://linkedin.com/in/abdulsalam'
+    github:   '#',  // e.g. 'https://github.com/abdulsalam'
+    twitter:  '#',  // e.g. 'https://x.com/abdulsalam'
+    dribbble: '#',  // e.g. 'https://dribbble.com/abdulsalam'
+  },
+
+  // Har project ke links. '#' chora to button khud hide ho jayega.
+  projects: {
+    'p1': { live: '#', github: '#' },  // E-Commerce App
+    'p2': { live: '#', github: '#' },  // SaaS Analytics Dashboard
+    'p3': { live: '#', github: '#' },  // Real-Time Messaging App
+    'p4': { live: '#', github: '#' },  // AI SaaS Landing Page
+    'p5': { live: '#', github: '#' },  // Weather App
+    'p6': { live: '#', github: '#' },  // Kanban Board
+  },
+
+  // Formspree form id. Free banane ke liye: https://formspree.io -> New form ->
+  // email apna daalein, aur yahan form ki ID paste karein (e.g. 'xyzabcd').
+  // Khali ('') chora to form mailto: fallback se aapke email app se send hoga.
+  formspreeId: '',
+
+  // contact email (mailto fallback isi par jayega)
+  contactEmail: 'abdulshooter4303m@email.com',
+};
+
 document.addEventListener('DOMContentLoaded', () => {
+  applySiteConfig();
   initLoader();
   initCustomCursor();
   initMobileMenu();
@@ -15,6 +48,55 @@ document.addEventListener('DOMContentLoaded', () => {
   initTestimonialSlider();
   initContactForm();
 });
+
+/* ==========================================================
+  0. SITE CONFIG APPLIER - links wire karta hai
+========================================================== */
+function applySiteConfig() {
+  // Social icons wire karna (index.html ke social links order se)
+  const socialMap = ['linkedin', 'github', 'twitter', 'dribbble'];
+  const socialAnchors = document.querySelectorAll('.social-links .social-icon');
+  socialAnchors.forEach((a, i) => {
+    const key = socialMap[i];
+    if (!key || !SITE_CONFIG.socials[key]) return;
+    const url = SITE_CONFIG.socials[key];
+    if (url && url !== '#') {
+      a.href = url;
+      a.target = '_blank';
+      a.rel = 'noopener noreferrer';
+    } else {
+      // Link nahi mila to button ko chupa dein taake dead click na lage
+      a.style.display = 'none';
+    }
+  });
+
+  // Project cards wire karna: card order = p1..p6
+  const projectCards = document.querySelectorAll('.project-card');
+  projectCards.forEach((card, i) => {
+    const cfg = SITE_CONFIG.projects['p' + (i + 1)];
+    if (!cfg) return;
+    const liveBtn = card.querySelector('.project-btn-live');
+    const gitBtn = card.querySelector('.project-btn-git');
+    if (liveBtn) {
+      if (cfg.live && cfg.live !== '#') {
+        liveBtn.href = cfg.live;
+        liveBtn.target = '_blank';
+        liveBtn.rel = 'noopener noreferrer';
+      } else {
+        liveBtn.style.display = 'none';
+      }
+    }
+    if (gitBtn) {
+      if (cfg.github && cfg.github !== '#') {
+        gitBtn.href = cfg.github;
+        gitBtn.target = '_blank';
+        gitBtn.rel = 'noopener noreferrer';
+      } else {
+        gitBtn.style.display = 'none';
+      }
+    }
+  });
+}
 
 /* ==========================================================
   1. PRELOADER & PAGE REVEAL
@@ -632,14 +714,56 @@ function initContactForm() {
     }
 
     // Success simulation state
-    showToast('Connecting and sending your message...', true);
+    const submitBtn = form.querySelector('button[type="submit"]');
+    const originalBtnHTML = submitBtn ? submitBtn.innerHTML : '';
+    if (submitBtn) {
+      submitBtn.disabled = true;
+      submitBtn.innerHTML = '<span>Sending... <i class="fa-solid fa-spinner fa-spin"></i></span>';
+    }
+
+    // ---- Send via Formspree (agar formspreeId set hai) ----
+    if (SITE_CONFIG.formspreeId) {
+      fetch('https://formspree.io/f/' + SITE_CONFIG.formspreeId, {
+        method: 'POST',
+        headers: { 'Accept': 'application/json', 'Content-Type': 'application/json' },
+        body: JSON.stringify({ name, email, subject, message })
+      })
+        .then(res => {
+          if (res.ok) {
+            showToast('Message sent! Abdul will get back to you soon.', true);
+            form.reset();
+            inputs.forEach(input => input.classList.remove('has-value'));
+          } else {
+            res.json().then(data => {
+              showToast(data.errors && data.errors.length ? data.errors[0].message : 'Send failed. Email directly at ' + SITE_CONFIG.contactEmail, false);
+            }).catch(() => showToast('Send failed. Email directly at ' + SITE_CONFIG.contactEmail, false));
+          }
+        })
+        .catch(() => showToast('Network error. Email directly at ' + SITE_CONFIG.contactEmail, false))
+        .finally(() => {
+          if (submitBtn) {
+            submitBtn.disabled = false;
+            submitBtn.innerHTML = originalBtnHTML;
+          }
+        });
+      return;
+    }
+
+    // ---- Fallback: mailto: link se default email app kholo ----
+    const mailto = 'mailto:' + SITE_CONFIG.contactEmail
+      + '?subject=' + encodeURIComponent('[' + name + '] ' + subject)
+      + '&body=' + encodeURIComponent(message + '\n\n— ' + name + ' (' + email + ')');
+    window.location.href = mailto;
 
     setTimeout(() => {
-      showToast('Message sent! Abdul will get back to you soon.', true);
+      showToast('Your email app is opening. If nothing happens, email ' + SITE_CONFIG.contactEmail, true);
       form.reset();
-      // Reset inputs state
       inputs.forEach(input => input.classList.remove('has-value'));
-    }, 2000);
+      if (submitBtn) {
+        submitBtn.disabled = false;
+        submitBtn.innerHTML = originalBtnHTML;
+      }
+    }, 1500);
   });
 
   function showToast(message, isSuccess) {
