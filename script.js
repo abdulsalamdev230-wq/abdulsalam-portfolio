@@ -135,6 +135,16 @@ function initLoader() {
     loaderBar.style.width = progress + '%';
     loaderPercent.innerText = progress + '%';
   }, 100);
+
+  // FAILSAFE: Agar GSAP CDN load na ho ya animation ruk jaye to loader
+  // ko force-hide karein taake visitor ko hamesha ke liye blank screen na dikhe
+  setTimeout(() => {
+    if (getComputedStyle(loader).visibility !== 'hidden') {
+      loader.style.opacity = '0';
+      loader.style.visibility = 'hidden';
+      loader.style.pointerEvents = 'none';
+    }
+  }, 5000);
 }
 
 /* ==========================================================

@@ -394,10 +394,12 @@ section {
 
 /* Hero Section */
 .hero {
-  height: 100vh;
+  min-height: 100vh;
+  padding: 140px 0 80px;
   display: flex;
   align-items: center;
   position: relative;
+  overflow: visible;
 }
 
 .hero-grid {
@@ -1367,8 +1369,17 @@ textarea.form-input {
     text-align: center;
   }
   
+  /* Hero content mobile par lamba hota hai - natural top alignment
+     rakhen taake avatar page ke upar overflow na ho */
+  .hero {
+    min-height: auto;
+    align-items: flex-start;
+    padding-top: 130px;
+  }
+  
   .hero-visual {
-    height: 400px;
+    height: auto;
+    min-height: 380px;
     order: -1;
   }
   
