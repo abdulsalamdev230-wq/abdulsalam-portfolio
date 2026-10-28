@@ -576,17 +576,7 @@ function initGsapAnimations() {
     ease: 'power3.out'
   });
 
-  gsap.from('.project-card', {
-    scrollTrigger: {
-      trigger: '.projects',
-      start: 'top 75%',
-    },
-    y: 60,
-    opacity: 0,
-    duration: 0.8,
-    stagger: 0.15,
-    ease: 'power3.out'
-  });
+  // Keep project cards visible even if ScrollTrigger fails to initialize.
 
   // 7. Interactive Magnetic Buttons cursor follow logic
   const magneticBtns = document.querySelectorAll('.btn-premium');
