@@ -19,7 +19,7 @@ const SITE_CONFIG = {
 
   // Har project ke links. '#' chora to button khud hide ho jayega.
   projects: {
-    'p1': { live: '#', github: '#' },  // E-Commerce App
+    'p1': { live: 'https://abdulsalamdev230-wq.github.io/Fano-Fan-Website/', github: 'https://github.com/abdulsalamdev230-wq/Fano-Fan-Website' },  // Fano Fan storefront
     'p2': { live: '#', github: '#' },  // SaaS Analytics Dashboard
     'p3': { live: '#', github: '#' },  // Real-Time Messaging App
     'p4': { live: '#', github: '#' },  // AI SaaS Landing Page
