@@ -10,3 +10,6 @@ package-lock.json
 # OS junk
 .DS_Store
 Thumbs.db
+
+# local verification screenshots
+artifacts/
