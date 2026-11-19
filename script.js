@@ -19,6 +19,7 @@ const SITE_CONFIG = {
   // Project cards: data-project="p1" ... "p5" ke links override karne ke liye.
   // Khali ya '#' chhorein to HTML ka link use hoga.
   projects: {
+    p0: { live: '', github: '' },
     p1: { live: '', github: '' },
     p2: { live: '', github: '' },
     p3: { live: '', github: '' },
