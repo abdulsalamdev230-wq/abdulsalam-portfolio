@@ -36,6 +36,12 @@
     html, body { margin: 0; padding: 0; background-color: #0B1220; }
     flutter-view { background-color: #0B1220; }
   </style>
+  <script>
+    // Demo entry: mark onboarding as seen so the web demo opens on the sign-in
+    // screen (the onboarding route paints incorrectly on canvaskit). Visitors
+    // can explore the app with "Continue as guest".
+    try { localStorage.setItem('flutter.vyro.seenOnboarding', 'true'); } catch (e) {}
+  </script>
   <script src="flutter_bootstrap.js" async></script>
 </body>
 </html>
